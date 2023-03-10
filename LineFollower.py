@@ -13,6 +13,19 @@ def get_frame(cap, scaling_factor):
     
     return frame
 
+# Define el color en formato hexadecimal
+hex_color = '#23705e'
+
+# Convierte el color hexadecimal a HSV
+rgb_color = tuple(int(hex_color[i:i+2], 16) for i in (1, 3, 5))
+hsv_color = cv2.cvtColor(np.array([[rgb_color]], dtype=np.uint8), cv2.COLOR_RGB2HSV)[0][0]
+
+# Define el rango de valores en el espacio de color HSV correspondiente al color turquesa
+hue_tolerance = 10 # margen de tolerancia en el valor de matiz
+saturation_threshold = 50 # valor mínimo de saturación
+value_threshold = 50 # valor mínimo de brillo
+
+
 if __name__=='__main__':
     cap = cv2.VideoCapture(0)
     scaling_factor = 0.5
@@ -24,13 +37,12 @@ if __name__=='__main__':
             # Convierte el color a HSV
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
             
-            # # # Aquí se define el color azul rn el espacio de HSV
+            # Aquí se define el color azul rn el espacio de HSV
             # lower = np.array([60,100,100])
             # upper = np.array([180,255,255])
                     
-            # Aquí se define cualquier color en el espacio de HSV
-            lower = np.array([73,50,50])        
-            upper = np.array([93,255,255])        
+            lower = np.array([hsv_color[0] - hue_tolerance, saturation_threshold, value_threshold])
+            upper = np.array([hsv_color[0] + hue_tolerance, 255, 255])      
 
             # LIMITA la imagen para solo mostrar el azul
             mask = cv2.inRange(hsv, lower, upper)
