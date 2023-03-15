@@ -27,6 +27,13 @@ hue_tolerance = 10 # margen de tolerancia en el valor de matiz
 saturation_threshold = 50 # valor mínimo de saturación
 value_threshold = 50 # valor mínimo de brillo
 
+
+################################### Esto es para la cuestión del cambio de coordenadas##########
+
+# Definir las coordenadas del rectángulo
+x1, y1 = 10, 10  # esquina superior izquierda
+x2, y2 = 310, 230  # esquina inferior derecha
+
 ################################# Esto es para leer la cámara #################################
 
 
@@ -59,6 +66,10 @@ if __name__=='__main__':
             # Encuentra los contornos en la máscara
             contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+            # Dibuja un rectangulo para poder enmarcar allí lo que deseo
+            cv2.rectangle(res, (x1, y1), (x2, y2), (0, 255, 0), 2)
+
+            # Dibuja un rectangulo en la línea que quiero monitorear
             if len(contours) > 0:
                 # Encuentra el contorno más grande
                 contour = max(contours, key=cv2.contourArea)
