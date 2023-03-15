@@ -34,12 +34,20 @@ value_threshold = 50 # valor mínimo de brillo
 x1, y1 = 10, 10  # esquina superior izquierda
 x2, y2 = 310, 230  # esquina inferior derecha
 
+# Definir las coordenadas del rectángulo fijo
+rect_top_left = (0, 2)
+rect_bottom_right = (10, -2)
+
 ################################# Esto es para leer la cámara #################################
 
 
 if __name__=='__main__':
     cap = cv2.VideoCapture(0)
     scaling_factor = 0.5
+
+    # Establecer el tamaño de la ventana
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
     
     # Itera hasta que se presione ESC
     while True:
@@ -67,7 +75,7 @@ if __name__=='__main__':
             contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
             # Dibuja un rectangulo para poder enmarcar allí lo que deseo
-            cv2.rectangle(res, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
             # Dibuja un rectangulo en la línea que quiero monitorear
             if len(contours) > 0:
