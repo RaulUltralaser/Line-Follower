@@ -13,6 +13,8 @@ def get_frame(cap, scaling_factor):
     
     return frame
 
+################################ Esto es para la cuestión de color ############################
+
 # Define el color en formato hexadecimal
 hex_color = '#23705e'
 
@@ -24,6 +26,8 @@ hsv_color = cv2.cvtColor(np.array([[rgb_color]], dtype=np.uint8), cv2.COLOR_RGB2
 hue_tolerance = 10 # margen de tolerancia en el valor de matiz
 saturation_threshold = 50 # valor mínimo de saturación
 value_threshold = 50 # valor mínimo de brillo
+
+################################# Esto es para leer la cámara #################################
 
 
 if __name__=='__main__':
