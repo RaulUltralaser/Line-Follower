@@ -41,13 +41,14 @@ rect_bottom_right = (10, -2)
 # Tamaño del rectangulo 
 rect_top_left_coord_originales = (0,0)
 rect_bottom_right_coord_originales = (300,220)
-#Definir la relación
+
+#Definir la relación entre las coordenadas originales y las de la gráfica
 a = (rect_bottom_right[0] - rect_top_left[0]) / (rect_bottom_right_coord_originales[0] - rect_top_left_coord_originales[0])
 b = rect_top_left_coord_originales[1]
 
-c = (rect_bottom_right[1] - rect_top_left[1]) / (rect_bottom_right_coord_originales[1]-rect_top_left_coord_originales[1]) 
+c1 = (rect_bottom_right[1] - rect_top_left[1]) / (rect_bottom_right_coord_originales[1]-rect_top_left_coord_originales[1]) 
 d = rect_top_left[1]
-
+#print(c)
 
 ################################# Esto es para leer la cámara #################################
 
@@ -106,12 +107,13 @@ if __name__=='__main__':
                 centro_y=y+h/2
 
                 # Restar las coordenadas del rectángulo fijo para obtener las coordenadas relativas
-                rel_x = centro_x - x1
-                rel_y = centro_y - y2
+                rec_x = centro_x - x1
+                rec_y = centro_y - y1
 
                 # Cálculo para las nuevas coordenadas en relación a la gráfica
-                x_g = a*rel_x+b
-                y_g = c*rel_y+d
+                x_g = a*rec_x+b
+                y_g = (c1*rec_y)+d
+
                 # Muestra las coordenadas del objeto azul en la ventana
                 print(f"Coordenadas (x, y) del centro del objeto azul: ({x_g}, {y_g})")
 
